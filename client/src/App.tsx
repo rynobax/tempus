@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import Header from "./Header";
+
+import Body from "./components/Body";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div className="min-h-screen min-w-full">
       <Header />
-      <div>This is the body</div>
+      <Body />
     </div>
   );
 }
