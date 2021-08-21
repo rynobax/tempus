@@ -7,7 +7,7 @@ interface BodyProps {}
 const Body: React.FC<BodyProps> = (props) => {
   const servers = usePollServers();
   return (
-    <div>
+    <div className="container mx-auto flex flex-row flex-wrap">
       {servers.map((server) => (
         <Server key={server.server_info.id} server={server} />
       ))}

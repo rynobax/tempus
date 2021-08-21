@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-interface HeaderProps {}
+interface HeaderProps {
+  playerName: string | null;
+  openFilters: () => void;
+  openLogin: () => void;
+}
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({
+  playerName,
+  openFilters,
+  openLogin,
+}) => {
   return (
-    <header>
-      <div className="flex flex-row">
-        <div className="flex-1">
-          <span>Tempus But Better</span>
-        </div>
-      </div>
-    </header>
+    <div className="sticky mx-auto flex top-2 rounded shadow bg-white w-max">
+      <button className="py-1 px-4">
+        {playerName ? playerName : "Set Player Id"}
+      </button>
+      <div className="border-l-2" />
+      <button className="py-1 px-4" onClick={openFilters}>
+        Edit Filters
+      </button>
+    </div>
   );
 };
 

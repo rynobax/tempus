@@ -30,38 +30,44 @@ export const usePollServers = () => {
   return servers.filter((s) => !s.server_info.hidden);
 };
 
-interface MapRecord {
+interface TempusMapRecord {
   result: { rank: number } | null;
   tier_info: Record<TF2Class, number>;
 }
 
-const fetchRank = async (map: string, userId: string): Promise<Ranks> => {
-  const [demo, soldier] = await Promise.all<MapRecord>(
+interface MapInfo {
+  demo: { rank: number | undefined; tier: number };
+  soldier: { rank: number | undefined; tier: number };
+}
+
+const fetchMapInfo = async (map: string, userId: string): Promise<MapInfo> => {
+  const [demo, soldier] = await Promise.all<TempusMapRecord>(
     [TF2Class.DEMOMAN, TF2Class.SOLDIER].map((tf2Class) =>
       fetchPath(
         `maps/name/${map}/zones/typeindex/map/1/records/player/${userId}/${tf2Class}`
       )
     )
   );
-  return { demo: demo.result?.rank, soldier: soldier.result?.rank };
+  return {
+    demo: { rank: demo.result?.rank, tier: demo.tier_info[TF2Class.DEMOMAN] },
+    soldier: {
+      rank: soldier.result?.rank,
+      tier: demo.tier_info[TF2Class.SOLDIER],
+    },
+  };
 };
 
-interface Ranks {
-  demo: number | undefined;
-  soldier: number | undefined;
-}
-
-export const useRanks = (map: string | undefined) => {
+export const useMapInfo = (map: string | undefined) => {
   const userId = useUserId();
-  const [ranks, setRanks] = useState<Ranks | null>(null);
+  const [mapInfo, setMapInfo] = useState<MapInfo | null>(null);
 
   useEffect(() => {
     if (userId && map) {
-      fetchRank(map, userId).then(setRanks);
+      fetchMapInfo(map, userId).then(setMapInfo);
     } else {
-      setRanks(null);
+      setMapInfo(null);
     }
   }, [userId]);
 
-  return ranks;
+  return mapInfo;
 };
