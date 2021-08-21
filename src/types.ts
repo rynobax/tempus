@@ -23,12 +23,18 @@ export interface TempusServer {
   };
 }
 
-export interface TempusRank {
-  solider: number;
-  demo: number;
-}
-
 export enum TF2Class {
   SOLDIER = 3,
   DEMOMAN = 4,
 }
+
+export type TempusCountry =
+  | "United States"
+  | "Australia"
+  | "Russia"
+  | "Germany"
+  | "France"
+  | "New Zealand"
+  | "Singapore"
+  | "South Africa"
+  | "South Korea";

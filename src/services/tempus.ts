@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { TempusRank, TempusServer, TF2Class } from "../types";
+import { TempusServer, TF2Class } from "../types";
 
 const API_ROOT = "https://tempus.xyz/api";
 

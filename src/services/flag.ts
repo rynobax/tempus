@@ -1,7 +1,9 @@
+import { TempusCountry } from "../types";
+
 const flagUrl = (code: string) =>
   `https://www.countryflags.io/${code}/flat/48.png`;
 
-export function getFlagSrc(country: string) {
+export function getFlagSrc(country: TempusCountry) {
   switch (country) {
     case "United States":
       return flagUrl("us");
@@ -22,7 +24,7 @@ export function getFlagSrc(country: string) {
     case "South Korea":
       return flagUrl("kr");
     default:
-      console.log("Missing ", country);
+      console.error("Missing country ", country);
       return "";
   }
 }
