@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import Header from "./Header";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App">
-      <header className="App-header">yo</header>
+    <div className="min-h-screen min-w-full">
+      <Header />
+      <div>This is the body</div>
     </div>
   );
 }
