@@ -22,3 +22,13 @@ export interface TempusServer {
     hidden: boolean;
   };
 }
+
+export interface TempusRank {
+  solider: number;
+  demo: number;
+}
+
+export enum TF2Class {
+  SOLDIER = 3,
+  DEMOMAN = 4,
+}

@@ -9,7 +9,7 @@ const Body: React.FC<BodyProps> = (props) => {
   return (
     <div>
       {servers.map((server) => (
-        <Server server={server} />
+        <Server key={server.server_info.id} server={server} />
       ))}
     </div>
   );
