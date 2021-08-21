@@ -1,9 +1,20 @@
 import React from "react";
-import {} from "oidc-client";
+import { UserManager } from "oidc-client";
+import env from "./env";
+
+const manager = new UserManager({
+  authority: "https://steamcommunity.com/openid/",
+  client_id: env.STEAM_API_KEY,
+  redirect_uri: "localhost:3000",
+});
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
+  function signIn() {
+    manager.signinRedirect();
+  }
+
   return (
     <header>
       <div className="flex flex-row">
@@ -11,7 +22,7 @@ const Header: React.FC<HeaderProps> = () => {
           <span>Tempus But Better</span>
         </div>
         <div className="flex-initial">
-          <button>Login with Steam</button>
+          <button onClick={signIn}>Login with Steam</button>
         </div>
       </div>
     </header>
