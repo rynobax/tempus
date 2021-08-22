@@ -34,7 +34,7 @@ const Filters: React.FC<FiltersProps> = ({
                   key={country}
                   type="checkbox"
                   checked={!filteredCountries.includes(country)}
-                  onClick={() => toggleCountry(country)}
+                  onChange={() => toggleCountry(country)}
                 />
               </div>
               <div

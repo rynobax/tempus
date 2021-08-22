@@ -34,8 +34,12 @@ function App() {
           openLogin={openLogin}
           playerName={null}
         />
-        <Body />
-        <Dialog isOpen={filtersOpen} onDismiss={() => setFiltersOpen(false)}>
+        <Body filteredCountries={filteredCountries} />
+        <Dialog
+          aria-label="filters"
+          isOpen={filtersOpen}
+          onDismiss={() => setFiltersOpen(false)}
+        >
           <Filters
             filteredCountries={filteredCountries}
             toggleCountry={toggleCountry}

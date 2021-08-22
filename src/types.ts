@@ -16,7 +16,7 @@ export interface TempusServer {
     id: number;
     name: string;
     shortname: string;
-    country: string;
+    country: TempusCountry;
     addr: string;
     port: number;
     hidden: boolean;

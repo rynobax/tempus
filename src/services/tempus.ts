@@ -62,11 +62,17 @@ export const useMapInfo = (map: string | undefined) => {
   const [mapInfo, setMapInfo] = useState<MapInfo | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
     if (userId && map) {
-      fetchMapInfo(map, userId).then(setMapInfo);
+      fetchMapInfo(map, userId).then((info) => {
+        if (!cancelled) setMapInfo(info);
+      });
     } else {
       setMapInfo(null);
     }
+    return () => {
+      cancelled = true;
+    };
   }, [userId]);
 
   return mapInfo;
