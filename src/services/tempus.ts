@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { TempusServer, TF2Class } from "../types";
+import { TempusSearch, TempusServer, TF2Class } from "../types";
 
 const API_ROOT = "https://tempus.xyz/api";
 
@@ -12,10 +12,11 @@ const useUserId = () => {
   return userId;
 };
 
-const fetchPath = (path: string) =>
-  fetch(`${API_ROOT}/${path}`).then((res) => res.json());
+function fetchPath<T>(path: string): Promise<T> {
+  return fetch(`${API_ROOT}/${path}`).then((res) => res.json());
+}
 
-const fetchServers = () => fetchPath("servers/statusList");
+const fetchServers = () => fetchPath<TempusServer[]>("servers/statusList");
 
 export const usePollServers = () => {
   const [servers, setServers] = useState<TempusServer[]>([]);
@@ -41,9 +42,9 @@ interface MapInfo {
 }
 
 const fetchMapInfo = async (map: string, userId: string): Promise<MapInfo> => {
-  const [demo, soldier] = await Promise.all<TempusMapRecord>(
+  const [demo, soldier] = await Promise.all(
     [TF2Class.DEMOMAN, TF2Class.SOLDIER].map((tf2Class) =>
-      fetchPath(
+      fetchPath<TempusMapRecord>(
         `maps/name/${map}/zones/typeindex/map/1/records/player/${userId}/${tf2Class}`
       )
     )
@@ -77,3 +78,6 @@ export const useMapInfo = (map: string | undefined) => {
 
   return mapInfo;
 };
+
+export const searchForPlayer = (search: string) =>
+  fetchPath<TempusSearch>(`search/playersAndMaps/${search}`);

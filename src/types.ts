@@ -38,3 +38,14 @@ export type TempusCountry =
   | "Singapore"
   | "South Africa"
   | "South Korea";
+
+export interface TempusPlayer {
+  id: string;
+  name: string;
+  steamid: string;
+}
+
+export interface TempusSearch {
+  players: Array<TempusPlayer>;
+  maps: Array<unknown>;
+}

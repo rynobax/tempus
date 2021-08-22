@@ -47,6 +47,7 @@ const Filters: React.FC<FiltersProps> = ({
           );
         })}
       </div>
+      <div>TODO: rank</div>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Body: React.FC<BodyProps> = ({ filteredCountries }) => {
     (s) => !filteredCountries.includes(s.server_info.country)
   );
   return (
-    <div className="container mx-auto flex flex-row flex-wrap">
+    <div className="container mx-auto flex flex-row flex-wrap justify-center">
       {servers.map((server) => (
         <Server key={server.server_info.id} server={server} />
       ))}

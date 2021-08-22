@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <div className="sticky mx-auto flex top-2 rounded shadow bg-white w-max">
-      <button className="py-1 px-4">
+      <button className="py-1 px-4" onClick={openLogin}>
         {playerName ? playerName : "Set Player Id"}
       </button>
       <div className="border-l-2" />

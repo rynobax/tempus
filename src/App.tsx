@@ -3,18 +3,27 @@ import Dialog from "@reach/dialog";
 
 import "@reach/dialog/styles.css";
 
+import { useLocalStorage } from "./services/localstorage";
+import { UserIdProvider } from "./services/tempus";
+
+import { TempusCountry, TempusPlayer } from "./types";
+
 import Body from "./components/Body";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
-import { UserIdProvider } from "./services/tempus";
-import { TempusCountry } from "./types";
-import { useLocalStorage } from "./services/localstorage";
+import PlayerId from "./components/PlayerId";
 
 function App() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [filteredCountries, setFilteredCountries] = useLocalStorage<
     TempusCountry[]
   >("filteredCountries", []);
+
+  const [playerIdOpen, setPlayerIdOpen] = useState(false);
+  const [playerInfo, setPlayerInfo] = useLocalStorage<TempusPlayer | null>(
+    "playerInfo",
+    null
+  );
 
   const toggleCountry = (country: TempusCountry) => {
     if (filteredCountries.includes(country))
@@ -25,15 +34,17 @@ function App() {
   function openFilters() {
     setFiltersOpen(true);
   }
-  function openLogin() {}
+  function openLogin() {
+    setPlayerIdOpen(true);
+  }
 
   return (
-    <UserIdProvider value="74181">
+    <UserIdProvider value={playerInfo ? playerInfo.id : null}>
       <div className="min-h-screen min-w-full bg-gray-500">
         <Header
           openFilters={openFilters}
           openLogin={openLogin}
-          playerName={null}
+          playerName={playerInfo ? playerInfo.name : null}
         />
         <Body filteredCountries={filteredCountries} />
         <Dialog
@@ -44,6 +55,16 @@ function App() {
           <Filters
             filteredCountries={filteredCountries}
             toggleCountry={toggleCountry}
+          />
+        </Dialog>
+        <Dialog
+          aria-label="set-player-id"
+          isOpen={playerIdOpen}
+          onDismiss={() => setPlayerIdOpen(false)}
+        >
+          <PlayerId
+            onClose={() => setPlayerIdOpen(false)}
+            setPlayerInfo={setPlayerInfo}
           />
         </Dialog>
       </div>
