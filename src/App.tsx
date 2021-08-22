@@ -8,12 +8,13 @@ import Header from "./components/Header";
 import Filters from "./components/Filters";
 import { UserIdProvider } from "./services/tempus";
 import { TempusCountry } from "./types";
+import { useLocalStorage } from "./services/localstorage";
 
 function App() {
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [filteredCountries, setFilteredCountries] = useState<TempusCountry[]>(
-    []
-  );
+  const [filteredCountries, setFilteredCountries] = useLocalStorage<
+    TempusCountry[]
+  >("filteredCountries", []);
 
   const toggleCountry = (country: TempusCountry) => {
     if (filteredCountries.includes(country))
