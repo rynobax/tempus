@@ -39,13 +39,25 @@ export type TempusCountry =
   | "South Africa"
   | "South Korea";
 
-export interface TempusPlayer {
+export interface TempusSearchPlayer {
   id: string;
   name: string;
   steamid: string;
 }
 
 export interface TempusSearch {
-  players: Array<TempusPlayer>;
+  players: Array<TempusSearchPlayer>;
   maps: Array<unknown>;
+}
+
+export interface TempusPlayerStats {
+  class_rank_info: {
+    [TF2Class.DEMOMAN]: {
+      rank: number;
+    };
+    [TF2Class.SOLDIER]: {
+      rank: number;
+    };
+  };
+  // there is lots of other fields
 }

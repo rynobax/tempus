@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { searchForPlayer } from "../services/tempus";
-import { TempusPlayer, TempusSearch } from "../types";
+import { TempusSearchPlayer, TempusSearch } from "../types";
 
 type SearchResults =
   | {
@@ -12,7 +12,7 @@ type SearchResults =
 
 interface PlayerIdProps {
   onClose: () => void;
-  setPlayerInfo: (player: TempusPlayer) => void;
+  setPlayerInfo: (player: TempusSearchPlayer) => void;
 }
 
 const PlayerId: React.FC<PlayerIdProps> = ({ onClose, setPlayerInfo }) => {

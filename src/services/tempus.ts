@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { TempusSearch, TempusServer, TF2Class } from "../types";
+import {
+  TempusPlayerStats,
+  TempusSearch,
+  TempusServer,
+  TF2Class,
+} from "../types";
 
 const API_ROOT = "https://tempus.xyz/api";
 
@@ -81,3 +86,27 @@ export const useMapInfo = (map: string | undefined) => {
 
 export const searchForPlayer = (search: string) =>
   fetchPath<TempusSearch>(`search/playersAndMaps/${search}`);
+
+export const fetchPlayerInfo = (playerId: string) =>
+  fetchPath<TempusPlayerStats>(`players/id/${playerId}/stats`);
+
+export const usePlayerStats = () => {
+  const userId = useUserId();
+  const [playerInfo, setPlayerInfo] = useState<TempusPlayerStats | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (userId) {
+      fetchPlayerInfo(userId).then((info) => {
+        if (!cancelled) setPlayerInfo(info);
+      });
+    } else {
+      setPlayerInfo(null);
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  return playerInfo;
+};

@@ -15,12 +15,16 @@ const countries: TempusCountry[] = [
 
 interface FiltersProps {
   filteredCountries: TempusCountry[];
+  filterRankedServers: boolean;
   toggleCountry: (country: TempusCountry) => void;
+  toggleFilterRankedServers: () => void;
 }
 
 const Filters: React.FC<FiltersProps> = ({
-  toggleCountry,
   filteredCountries,
+  filterRankedServers,
+  toggleCountry,
+  toggleFilterRankedServers,
 }) => {
   return (
     <div>
@@ -47,7 +51,22 @@ const Filters: React.FC<FiltersProps> = ({
           );
         })}
       </div>
-      <div>TODO: rank</div>
+      <div className="font-header font-bold mt-4">Rank Filtering</div>
+      <div className="flex align-middle">
+        <div>
+          <input
+            type="checkbox"
+            checked={filterRankedServers}
+            onChange={() => toggleFilterRankedServers()}
+          />
+        </div>
+        <div
+          className="ml-2 flex-0 cursor-pointer"
+          onClick={() => toggleFilterRankedServers()}
+        >
+          Filter servers above my rank
+        </div>
+      </div>
     </div>
   );
 };

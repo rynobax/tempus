@@ -36,19 +36,21 @@ const Server: React.FC<ServerProps> = ({ server }) => {
   return (
     <div className="flex flex-col flex-0 w-64 h-36 bg-gray-50 m-4 rounded overflow-hidden shadow	">
       <div className="flex flex-row h-12 items-center p-2 border-b-2">
-        <div className="flex-1 font-header font-bold">{mapName}</div>
+        <div className="flex-1 font-header font-bold overflow-hidden overflow-ellipsis">
+          {mapName}
+        </div>
         <img className="" src={getFlagSrc(server.server_info.country)} />
       </div>
       <div className="flex flex-row h-full">
         <div className="w-1/2 h-full">
           <div className="flex flex-col h-full">
-            <div className="flex-1 flex">
+            <div className="flex-1 flex p-1">
               <div className="flex-0 text-sm">S {soldierTier}</div>
               <div className="flex-1 font-bold text-3xl text-center self-end">
                 {soldierRank ? `#${soldierRank}` : "-"}
               </div>
             </div>
-            <div className="flex-1 flex">
+            <div className="flex-1 flex p-1">
               <div className="flex-0 text-sm">D {demoTier}</div>
               <div className="flex-1 font-bold text-3xl text-center self-end">
                 {demoRank ? `#${demoRank}` : "-"}

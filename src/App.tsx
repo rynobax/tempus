@@ -6,7 +6,7 @@ import "@reach/dialog/styles.css";
 import { useLocalStorage } from "./services/localstorage";
 import { UserIdProvider } from "./services/tempus";
 
-import { TempusCountry, TempusPlayer } from "./types";
+import { TempusCountry, TempusSearchPlayer } from "./types";
 
 import Body from "./components/Body";
 import Header from "./components/Header";
@@ -20,15 +20,22 @@ function App() {
   >("filteredCountries", []);
 
   const [playerIdOpen, setPlayerIdOpen] = useState(false);
-  const [playerInfo, setPlayerInfo] = useLocalStorage<TempusPlayer | null>(
-    "playerInfo",
-    null
+  const [playerInfo, setPlayerInfo] =
+    useLocalStorage<TempusSearchPlayer | null>("playerInfo", null);
+
+  const [filterRankedServers, setFilterRankedServers] = useLocalStorage(
+    "filterRankedServers",
+    false
   );
 
   const toggleCountry = (country: TempusCountry) => {
     if (filteredCountries.includes(country))
       setFilteredCountries(filteredCountries.filter((c) => c !== country));
     else setFilteredCountries([...filteredCountries, country]);
+  };
+
+  const toggleFilterRankedServers = () => {
+    setFilterRankedServers(!filterRankedServers);
   };
 
   function openFilters() {
@@ -46,7 +53,10 @@ function App() {
           openLogin={openLogin}
           playerName={playerInfo ? playerInfo.name : null}
         />
-        <Body filteredCountries={filteredCountries} />
+        <Body
+          filteredCountries={filteredCountries}
+          filterRankedServers={filterRankedServers}
+        />
         <Dialog
           aria-label="filters"
           isOpen={filtersOpen}
@@ -55,6 +65,8 @@ function App() {
           <Filters
             filteredCountries={filteredCountries}
             toggleCountry={toggleCountry}
+            filterRankedServers={filterRankedServers}
+            toggleFilterRankedServers={toggleFilterRankedServers}
           />
         </Dialog>
         <Dialog
