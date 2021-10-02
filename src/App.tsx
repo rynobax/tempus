@@ -12,6 +12,7 @@ import Body from "./components/Body";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import PlayerId from "./components/PlayerId";
+import Stats from "./components/Stats";
 
 function App() {
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -28,6 +29,8 @@ function App() {
     false
   );
 
+  const [statsOpen, setStatsOpen] = useState(false);
+
   const toggleCountry = (country: TempusCountry) => {
     if (filteredCountries.includes(country))
       setFilteredCountries(filteredCountries.filter((c) => c !== country));
@@ -38,19 +41,13 @@ function App() {
     setFilterRankedServers(!filterRankedServers);
   };
 
-  function openFilters() {
-    setFiltersOpen(true);
-  }
-  function openLogin() {
-    setPlayerIdOpen(true);
-  }
-
   return (
     <UserIdProvider value={playerInfo ? playerInfo.id : null}>
       <div className="min-h-screen min-w-full bg-gray-500">
         <Header
-          openFilters={openFilters}
-          openLogin={openLogin}
+          openFilters={() => setFiltersOpen(true)}
+          openLogin={() => setPlayerIdOpen(true)}
+          openStats={() => setStatsOpen(true)}
           playerName={playerInfo ? playerInfo.name : null}
         />
         <Body
@@ -68,6 +65,13 @@ function App() {
             filterRankedServers={filterRankedServers}
             toggleFilterRankedServers={toggleFilterRankedServers}
           />
+        </Dialog>
+        <Dialog
+          aria-label="stats"
+          isOpen={statsOpen}
+          onDismiss={() => setStatsOpen(false)}
+        >
+          <Stats />
         </Dialog>
         <Dialog
           aria-label="set-player-id"
