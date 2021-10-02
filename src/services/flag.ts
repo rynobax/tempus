@@ -23,6 +23,10 @@ export function getFlagSrc(country: TempusCountry) {
       return flagUrl("za");
     case "South Korea":
       return flagUrl("kr");
+    case "Sweden":
+      return flagUrl("se");
+    case "Brazil":
+      return flagUrl("br");
     default:
       console.error("Missing country ", country);
       return "";

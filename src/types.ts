@@ -37,7 +37,9 @@ export type TempusCountry =
   | "New Zealand"
   | "Singapore"
   | "South Africa"
-  | "South Korea";
+  | "South Korea"
+  | "Sweden"
+  | "Brazil";
 
 export interface TempusSearchPlayer {
   id: string;
