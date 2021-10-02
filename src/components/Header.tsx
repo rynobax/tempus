@@ -19,9 +19,10 @@ const Header: React.FC<HeaderProps> = ({
         {playerName ? playerName : "Set Player Id"}
       </button>
       <div className="border-l-2" />
-      <button className="py-1 px-4" onClick={openStats}>
+      {/* ONE DAY */}
+      {/* <button className="py-1 px-4" onClick={openStats}>
         View Stats
-      </button>
+      </button> */}
       <div className="border-l-2" />
       <button className="py-1 px-4" onClick={openFilters}>
         Edit Filters
