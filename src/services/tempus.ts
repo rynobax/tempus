@@ -42,6 +42,7 @@ interface TempusMapRecord {
 }
 
 interface MapInfo {
+  map: string;
   demo: { rank: number | undefined; tier: number };
   soldier: { rank: number | undefined; tier: number };
 }
@@ -55,6 +56,7 @@ const fetchMapInfo = async (map: string, userId: string): Promise<MapInfo> => {
     )
   );
   return {
+    map,
     demo: { rank: demo.result?.rank, tier: demo.tier_info[TF2Class.DEMOMAN] },
     soldier: {
       rank: soldier.result?.rank,
@@ -79,9 +81,10 @@ export const useMapInfo = (map: string | undefined) => {
     return () => {
       cancelled = true;
     };
-  }, [userId]);
+  }, [userId, map]);
 
-  return mapInfo;
+  if (mapInfo?.map === map) return mapInfo;
+  else return null;
 };
 
 export const searchForPlayer = (search: string) =>
