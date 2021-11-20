@@ -1,7 +1,6 @@
 import { TempusCountry } from "../types";
 
-const flagUrl = (code: string) =>
-  `https://www.countryflags.io/${code}/flat/48.png`;
+const flagUrl = (code: string) => `https://flagcdn.com/w40/${code}.png`;
 
 export function getFlagSrc(country: TempusCountry) {
   switch (country) {
