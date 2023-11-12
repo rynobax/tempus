@@ -26,6 +26,16 @@ export function getFlagSrc(country: TempusCountry) {
       return flagUrl("se");
     case "Brazil":
       return flagUrl("br");
+    case "Japan":
+      return flagUrl("jp");
+    case "United Arab Emirates":
+      return flagUrl("ae");
+    case "Bahrain":
+      return flagUrl("bh");
+    case "Hong Kong":
+      return flagUrl("hk");
+    case "United Kingdom":
+      return flagUrl("gb");
     default:
       console.error("Missing country ", country);
       return "";

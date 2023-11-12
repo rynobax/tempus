@@ -39,7 +39,12 @@ export type TempusCountry =
   | "South Africa"
   | "South Korea"
   | "Sweden"
-  | "Brazil";
+  | "Brazil"
+  | "Japan"
+  | "United Arab Emirates"
+  | "Bahrain"
+  | "Hong Kong"
+  | "United Kingdom";
 
 export interface TempusSearchPlayer {
   id: string;
