@@ -6,7 +6,7 @@ import {
   TF2Class,
 } from "../types";
 
-const API_ROOT = "https://tempus2.xyz/api";
+const API_ROOT = "https://tempus2.xyz/api/v0";
 
 const UserIdContext = createContext<string | null>(null);
 
