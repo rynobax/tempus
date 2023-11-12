@@ -1,19 +1,26 @@
 import React from "react";
 import { TempusCountry } from "../types";
 
-const countries: TempusCountry[] = [
-  "Australia",
-  "Brazil",
-  "France",
-  "Germany",
-  "New Zealand",
-  "Russia",
-  "Singapore",
-  "South Africa",
-  "South Korea",
-  "Sweden",
-  "United States",
-];
+const countries: TempusCountry[] = (
+  [
+    "United States",
+    "Australia",
+    "Russia",
+    "Germany",
+    "France",
+    "New Zealand",
+    "Singapore",
+    "South Africa",
+    "South Korea",
+    "Sweden",
+    "Brazil",
+    "Japan",
+    "United Arab Emirates",
+    "Bahrain",
+    "Hong Kong",
+    "United Kingdom",
+  ] satisfies TempusCountry[]
+).sort();
 
 interface FiltersProps {
   filteredCountries: TempusCountry[];
